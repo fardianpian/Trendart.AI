@@ -1,0 +1,10 @@
+{
+  "preferences": {
+    "medium_focus": ["performance", "audiovisual", "archive-research"],
+    "geography": "global",
+    "project_scales": ["Micro", "Mid", "Large"]
+  },
+  "outputs": {
+    "memo_template": "prompts/memo_prompt.txt"
+  }
+}

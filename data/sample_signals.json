@@ -1,0 +1,88 @@
+[
+  {
+    "title": "UNESCO updates AI ethics guidance for cultural institutions",
+    "source": "UNESCO",
+    "published_at": "2024-05-20",
+    "summary": "Revised framework asks museums and festivals to disclose AI provenance and licensing, emphasizing community consent.",
+    "url": "https://unesco.org/ai-ethics",
+    "tags": ["ai-copyright", "provenance-transparency"]
+  },
+  {
+    "title": "Venice Biennale side program spotlights climate urgency in coastal cities",
+    "source": "Venice Biennale",
+    "published_at": "2024-04-18",
+    "summary": "New commissions pair sound walks with environmental data to reveal rising sea impacts on neighborhoods.",
+    "url": "https://example.com/venice-climate",
+    "tags": ["climate-urgency", "listening-spatial"]
+  },
+  {
+    "title": "Open call: diaspora archives for performance artists",
+    "source": "Performance Space New York",
+    "published_at": "2024-06-04",
+    "summary": "Residency invites artists to work with diaspora family archives, offering dramaturgy support and public showings.",
+    "tags": ["diaspora", "archive-practice"]
+  },
+  {
+    "title": "Research lab maps missing images in public datasets",
+    "source": "Digital Public Library",
+    "published_at": "2024-03-12",
+    "summary": "Fellowship cohort documents gaps in visual records across regions and proposes community-led digitization.",
+    "tags": ["missing-images", "archive-practice"]
+  },
+  {
+    "title": "Policy brief: European funding shifts toward provenance transparency",
+    "source": "Creative Europe",
+    "published_at": "2023-12-01",
+    "summary": "New funding lines prioritize traceable AI systems and open cultural data infrastructure.",
+    "tags": ["provenance-transparency", "policy"]
+  },
+  {
+    "title": "XR festival tests participatory public-space performances",
+    "source": "Sónar",
+    "published_at": "2024-01-20",
+    "summary": "Festival pilots multi-city AR interventions with citizen co-design sessions, focused on accessibility.",
+    "tags": ["participatory", "public-space", "accessibility"]
+  },
+  {
+    "title": "Art-tech lab explores decolonial methods for AI training",
+    "source": "Serpentine",
+    "published_at": "2023-10-15",
+    "summary": "Workshops critique dataset extraction and propose artist-led annotation circles using consent protocols.",
+    "tags": ["decolonial-method", "ai-copyright"]
+  },
+  {
+    "title": "Open data commons releases spatial audio field kit",
+    "source": "Open Data Commons",
+    "published_at": "2024-02-05",
+    "summary": "Toolkit standardizes community capture of spatial audio for public art and archives.",
+    "tags": ["listening-spatial", "public-space"]
+  },
+  {
+    "title": "University study links accessibility gaps in immersive arts",
+    "source": "MIT",
+    "published_at": "2024-05-01",
+    "summary": "Survey of 30 XR exhibitions finds low adoption of multi-sensory access plans and calls for new standards.",
+    "tags": ["accessibility", "public-space"]
+  },
+  {
+    "title": "Museum pilots provenance-first AI label on digital collections",
+    "source": "Tate",
+    "published_at": "2024-04-02",
+    "summary": "Labels show training data lineage and licenses, helping audiences understand AI-assisted restorations.",
+    "tags": ["provenance-transparency", "archive-practice"]
+  },
+  {
+    "title": "Biennale program explores participatory listening stations",
+    "source": "Sydney Biennale",
+    "published_at": "2024-01-28",
+    "summary": "Community groups co-create spatial audio maps of neighborhood care infrastructures.",
+    "tags": ["participatory", "listening-spatial"]
+  },
+  {
+    "title": "City arts fund backs public-space performances on climate resilience",
+    "source": "NYC Cultural Affairs",
+    "published_at": "2024-06-10",
+    "summary": "Grants support artists staging street performances with local climate researchers and youth groups.",
+    "tags": ["public-space", "climate-urgency"]
+  }
+]
