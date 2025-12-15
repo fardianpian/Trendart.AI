@@ -41,12 +41,25 @@ def load_config(path: Path) -> Dict[str, Any]:
         return {}
 
     text = path.read_text()
-    if util.find_spec("yaml"):
-        import yaml  # type: ignore
 
-        return yaml.safe_load(text) or {}
+    if path.suffix in {".yaml", ".yml"}:
+        try:
+            import yaml  # type: ignore
 
-    return json.loads(text)
+            return yaml.safe_load(text) or {}
+        except ModuleNotFoundError:
+            # Fall back to JSON so the tool still works without PyYAML, but explain the issue.
+            try:
+                return json.loads(text)
+            except json.JSONDecodeError as exc:
+                raise RuntimeError(
+                    "Install PyYAML or provide config as JSON; could not parse YAML file."
+                ) from exc
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError as exc:
+        raise RuntimeError(f"Invalid JSON config at {path}") from exc
 
 
 def parse_date(value: str) -> date:
@@ -381,7 +394,8 @@ def build_memo(sections: Dict[str, object]) -> str:
 
 
 def save_memo(memo: str, output_path: Path) -> None:
-    output_path.write_text(memo)
+    sanitized = memo.rstrip() + "\n"
+    output_path.write_text(sanitized)
 
 
 def run(signals_path: Path, output_path: Path, today: date | None = None) -> Dict[str, object]:

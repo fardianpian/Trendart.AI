@@ -43,7 +43,13 @@ function isValidSignalList(value: unknown): value is unknown[] {
 }
 
 export async function POST(request: Request) {
-  const body = (await request.json()) as GenerateRequest;
+  let body: GenerateRequest;
+  try {
+    body = (await request.json()) as GenerateRequest;
+  } catch (err) {
+    return NextResponse.json({ error: "Request body must be valid JSON." }, { status: 400 });
+  }
+
   if (!isValidSignalList(body.signals)) {
     return NextResponse.json(
       { error: "`signals` must be an array of signal objects." },
@@ -57,18 +63,26 @@ export async function POST(request: Request) {
 
   await fs.writeFile(signalsPath, JSON.stringify(body.signals, null, 2), "utf-8");
 
-  const { stdout, stderr, code } = await runPython(signalsPath, outputPath, body.today);
-  if (code !== 0) {
+  try {
+    const { stdout, stderr, code } = await runPython(signalsPath, outputPath, body.today);
+    if (code !== 0) {
+      return NextResponse.json(
+        {
+          error: "Memo generation failed.",
+          stderr,
+          stdout,
+        },
+        { status: 500 }
+      );
+    }
+
+    const memo = await fs.readFile(outputPath, "utf-8");
+    return NextResponse.json({ memo, stdout });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Unknown failure";
     return NextResponse.json(
-      {
-        error: "Memo generation failed.",
-        stderr,
-        stdout,
-      },
+      { error: "Memo generation could not start.", detail: message },
       { status: 500 }
     );
   }
-
-  const memo = await fs.readFile(outputPath, "utf-8");
-  return NextResponse.json({ memo, stdout });
 }
