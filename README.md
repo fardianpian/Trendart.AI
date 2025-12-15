@@ -218,3 +218,70 @@ A memo is valid only if:
 - It includes 5 niche cards following the template
 - It includes scoring + rationale
 - It ends with concrete actions for the next 7 days
+
+---
+
+## Configuration
+
+- `config.yaml` holds preferences for medium focus, geography, and memo template paths.
+- The CLI automatically reads this file (JSON or YAML syntax is accepted) and threads `medium_focus` and `geography` into project rationales and formatting.
+- Signals are validated on load; missing required fields or invalid dates will raise a clear error before memo generation.
+
+---
+
+## Quickstart (CLI)
+
+This repository now includes a minimal Python CLI that turns a JSON list of signals into a full Curatorial Opportunity Memo.
+
+### 1) Prepare signals
+
+`data/sample_signals.json` shows the expected structure for each signal:
+
+```json
+{
+  "title": "UNESCO updates AI ethics guidance for cultural institutions",
+  "source": "UNESCO",
+  "published_at": "2024-05-20",
+  "summary": "Revised framework asks museums and festivals to disclose AI provenance and licensing, emphasizing community consent.",
+  "url": "https://unesco.org/ai-ethics",
+  "tags": ["ai-copyright", "provenance-transparency"]
+}
+```
+
+### 2) Run the memo generator
+
+```bash
+python main.py data/sample_signals.json outputs/sample_memo.md --today 2024-06-30
+```
+
+Key behaviors:
+- **Horizon split**: signals are grouped into 90D / 1Y / 3Y based on `published_at`.
+- **Trend detection**: topics come from `tags` (preferred) or title/summary keywords, weighted by recency.
+- **Niche analysis**: identifies low-volume but fast-rising topics and fills any gaps with placeholders to ensure five cards.
+- **Project recommendations**: generates Micro/Mid/Large concepts with scores and rationale anchored to topic momentum.
+
+The resulting memo is written to `outputs/sample_memo.md` and follows the templates outlined above.
+
+## Next.js Web UI (frontend/)
+
+Run the curator pipeline from the browser using the bundled Next.js app:
+
+1) Install dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+2) Start the dev server (defaults to http://localhost:3000)
+
+```bash
+npm run dev
+```
+
+3) Paste signals JSON (same schema as the CLI), set the run date, and click **Generate memo**. The API route spawns `python main.py` under the repo root, so the Python toolchain must be available on the host.
+
+Notes:
+- The UI includes the sample signals; click **Use sample signals** to preload them.
+- `PYTHON_PATH` env can override the Python command if you do not use `python3`.
+- Output is rendered in Markdown and can be copied/downloaded for distribution.
